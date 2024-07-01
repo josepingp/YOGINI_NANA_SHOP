@@ -3,4 +3,4 @@
 define('HOST','localhost');
 define('USER','root');
 define('PASS','');
-define('DB','tienda');
+define('DB','yogini_nana');
