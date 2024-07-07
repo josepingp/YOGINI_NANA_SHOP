@@ -1,13 +1,13 @@
 <section class="about-me">
-    <div class="flex">
-        <div class="contact-data flex m-1-a">
+    <div class="flex contact-data-container m-1-a">
+        <div class="contact-data f-align m-a">
             <p>659780643</p>
-            <?php include '../../assets/svg/watssup.php'; ?>
+            <?php include './assets/svg/watssup.php'; ?>
         </div>
 
-        <div class="contact-data flex m-1-a">
+        <div class="contact-data f-align m-a">
             <p>josepingp@gmail.com</p>
-            <?php include '../../assets/svg/email.php'; ?>
+            <?php include './assets/svg/email.php'; ?>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
     </div>
 
 
-    <div class="m-1-a">
+    <div class="m-1-a f-msg">
         <p>
             Este proyecto está desarrollado solo con fines académicos.
             su código es público siéntete libre de colaborar o usarlo como gustes. ;-)
