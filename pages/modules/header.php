@@ -100,6 +100,10 @@
                     <li class="nav-m-item">
                         <a href="/proyecto/contact" class="nav-m-link">Contacto</a>
                     </li>
+                    
+                    <li class="nav-m-item">
+                        <a href="/Yoguini_Nana_Shop/user/close_sesion" class="nav-m-link">Cerrar sesion</a>
+                    </li>
 
                     <?php
                     if ((isset($user) && $_SESSION['rol'] == 1) or (isset($user) && $_SESSION['rol'] == 4)) {
@@ -176,7 +180,7 @@
                     </ul>
                 </section>
 
-                <section class="f-align g-1">
+                <section class="f-align g-2 user-section">
                     <article id="h-cart-container">
                         <?php
                         echo '<div class="cart-counter">';
@@ -190,9 +194,9 @@
                         </a>
                     </article>
                     <article class="icon-login-container f-align">
-
                         <?php if (isset($user)) { ?>
-                            <a class="login-link f-align g-1" href="/Yoguini_Nana_Shop/user/myaccount"><?php echo $user->takeInitials(); ?>
+                            <a class="login-link f-align g-1"
+                                href="/Yoguini_Nana_Shop/user/myaccount"><?php echo $user->takeInitials(); ?>
                                 <img src="<?php if (isset($user)) {
                                     if ($user->getPhoto() != '') {
                                         echo './repo/user/' . $user->getPhoto();
@@ -203,13 +207,17 @@
                                     echo './assets/img/sinlog.png';
 
                                 } ?>" alt="user image" class="user-login-img"></a>
-                        <?php } else {?>
+                        </article>
+                        <article>
+                            <a href="/Yoguini_Nana_Shop/user/close_sesion"><?php include "./assets/svg/logout.php";?></a>
+                        <?php } else { ?>
+                        </article>
                         <div class="login-btns f-align">
                             <a class="login-account" href="/Yoguini_Nana_Shop/user/login">Inicia sesion</a>
                             <a class="create-account" href="/Yoguini_Nana_Shop/user/register">Registrarse</a>
                         </div>
-                        <?php } ?>
-                    </article>
+                    <?php } ?>
+
                 </section>
             </section>
         </nav>

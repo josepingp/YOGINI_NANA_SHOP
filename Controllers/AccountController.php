@@ -44,8 +44,9 @@ class AccountController
             $direction = $this->addressService->getMainAddressByUserId($user->getId());
 
             $this->userService->updateUser($_POST, $_FILES, $user);
-
-            $this->pages->render('myAccount', ['user' => $user, 'direction' => $direction]);
+            $this->addressService->updateMainShippingAddress($user->getId(), $_POST);
+            
+            header('Location: /Yoguini_Nana_Shop/user/myaccount');
         } catch (Exception $e) {
             $user = $this->userService->findUserByEmail($_SESSION['email']);
             $direction = $this->addressService->getMainAddressByUserId($user->getId());

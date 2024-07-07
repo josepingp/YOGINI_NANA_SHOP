@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Lib\AuthJWT;
+use SebastianBergmann\Type\VoidType;
 use Services\UsersService;
 use Lib\Pages;
 use Exception;
@@ -40,5 +41,12 @@ class LoginController
             $msg = MessageSender::createMsg('error', $e->getMessage());
                 $this->pages->render('login', ['msg' => $msg]);
         }
+    }
+
+    public function closeSesion(): Void
+    {
+        setcookie("JWT", "", time() - 3600, "/");
+        setcookie("PHPSESSID", "", time() - 3600, "/");
+        header('Location: /Yoguini_Nana_Shop/');
     }
 }

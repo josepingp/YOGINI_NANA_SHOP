@@ -34,6 +34,10 @@ Router::add('POST', '/user/login', function () {
     return (new LoginController())->login();
 });
 
+Router::add('GET', '/user/close_sesion', function () {
+    return (new LoginController())->closeSesion();
+});
+
 Router::add('GET', '/user/myaccount', function () {
     return (new AccountController())->load();
 });
@@ -41,6 +45,8 @@ Router::add('GET', '/user/myaccount', function () {
 Router::add('POST', '/user/myaccount', function () {
     return (new AccountController())->update();
 });
+
+
 
 
 

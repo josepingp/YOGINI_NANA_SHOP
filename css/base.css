@@ -63,7 +63,6 @@ ul {
 
 .nav {
     background: radial-gradient(circle, rgba(200, 173, 157, 1) 0%, rgba(189, 139, 122, 1) 100%);
-    position: relative;
     z-index: 6;
 }
 
@@ -144,8 +143,8 @@ ul {
 }
 
 .user-login-img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 100px;
     object-fit: cover;
     object-position: 0 0;
@@ -320,6 +319,17 @@ a.create-account {
     color: var(--primary);
 }
 
+a.login-link {
+    font-size: 2rem;
+}
+
+.logout {
+    width: 30px;
+    fill: var(--black);
+    padding-top: .2rem;
+    margin-right: 1rem;
+}
+
 #section-errors {
     padding: 1rem;
     background-color: rgb(221, 81, 81);
@@ -333,6 +343,11 @@ a.create-account {
 #section-errors p {
     width: 100%;
     text-align: center;
+}
+
+footer {
+    position: relative;
+    z-index: 2;
 }
 
 footer .about-me {

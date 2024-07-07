@@ -88,33 +88,33 @@
                     <h3 class="section-title">DIRECCION PRINCIPAL</h3>
                     <div class="m-1-a flex data-l-cont">
                         <label for="d-street">Calle</label>
-                        <input type="text" id="d-street" name="street" value="<?php (!is_null($direction)) ? $direction->getStreet() : '';?>" placeholder="Jose Cueto">
+                        <input type="text" id="d-street" name="street" value="<?php echo (!is_null($direction)) ? $direction['street'] : '';?>" placeholder="Jose Cueto">
                     </div>
                     <div class="data-v-cont flex">
                         <div class="min-data m-1-a flex data-l-cont">
                             <label for="street-number">Número</label>
-                            <input type="text" id="street-number" name="number" value="<?php (!is_null($direction)) ? $direction->getNumber() : '';?>" placeholder="57" >
+                            <input type="text" id="street-number" name="number" value="<?php echo (!is_null($direction)) ? $direction['number'] : '';?>" placeholder="57" >
                         </div>
                         <div class="min-data m-1-a flex data-l-cont">
                             <label for="floor-number">Piso</label>
-                            <input type="text" id="floor-number" name="floor" value="<?php (!is_null($direction)) ? $direction->getFloor() : '';?>" placeholder="3">
+                            <input type="text" id="floor-number" name="floor" value="<?php echo (!is_null($direction)) ? $direction['floor'] : '';?>" placeholder="3">
                         </div>
                         <div class="min-data m-1-a flex data-l-cont">
                             <label for="floor-appartment">Puerta</label>
-                            <input type="text" id="floor-appartment" name="apartment" value="<?php (!is_null($direction)) ? $direction->getApartment() : '';?>" placeholder="C">
+                            <input type="text" id="floor-appartment" name="apartment" value="<?php echo (!is_null($direction)) ? $direction['apartment'] : '';?>" placeholder="C">
                         </div>
                     </div>
                     <div class="min-data m-1-a flex data-l-cont">
                         <label for="d-city">Ciudad</label>
-                        <input type="text" id="d-city" name="city" value="<?php (!is_null($direction)) ? $direction->getCity() : '';?>" placeholder="Avilés">
+                        <input type="text" id="d-city" name="city" value="<?php echo (!is_null($direction)) ? $direction['city'] : '';?>" placeholder="Avilés">
                     </div>
                     <div class="min-data m-1-a flex data-l-cont">
                         <label for="zip-code">Código Postal</label>
-                        <input type="text" id="zip-code" name="postal_code" value="<?php (!is_null($direction)) ? $direction->getPostalCode() : '';?>" placeholder="33402">
+                        <input type="text" id="zip-code" name="postal_code" value="<?php echo (!is_null($direction)) ? $direction['postal_code'] : '';?>" placeholder="33402">
                     </div>
                     <div class="min-data m-1-a flex data-l-cont">
                         <label for="d-province">Provincia</label>
-                        <input type="text" id="d-province" name="province" value="<?php (!is_null($direction)) ? $direction->getRegion() : '';?>" placeholder="Asturias">
+                        <input type="text" id="d-province" name="region" value="<?php echo (!is_null($direction)) ? $direction['region'] : '';?>" placeholder="Asturias">
                     </div>
                 </section>
                 <section class="form-section m-1-a s-5">
