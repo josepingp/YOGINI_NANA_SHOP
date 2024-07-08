@@ -74,7 +74,7 @@
 
                 <ul class="nav-m-items">
                     <li class="nav-m-item">
-                        <a href="/proyecto/" class="nav-m-link">Inicio</a>
+                        <a href="/Yoguini_Nana_Shop/" class="nav-m-link">Home</a>
                     </li>
                     <li class="nav-m-item-dropdown">
                         <a href="/proyecto/products" class="nav-m-link dropdown-toggle">
@@ -140,7 +140,7 @@
                     </a>
 
                     <ul class="f-align g-2">
-                        <li class="d-navbar-link"><a href="/proyecto/">Home</a></li>
+                        <li class="d-navbar-link"><a href="/Yoguini_Nana_Shop/">Home</a></li>
 
                         <li class="d-navbar-link drop">
                             <a class="nav-d-link" href="/proyecto/products">

@@ -18,10 +18,11 @@
 }
 
 body {
-    background-image: url(../assets/img/fondo.png);
+    /* background-image: url(../assets/img/fondoalternativo.webp);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 50% 50%; */
+    background-color: var(--white);
     min-height: 85svh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -345,12 +346,10 @@ a.login-link {
     text-align: center;
 }
 
-footer {
+footer .about-me {
     position: relative;
     z-index: 2;
-}
-
-footer .about-me {
+    min-height: 71px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -383,9 +382,9 @@ footer .f-msg {
 @media (min-width: 768px) {}
 
 @media (min-width: 992px) {
-    main {
-        background-image: url(../assets/img/fondo2.png);
-    }
+    /* body {
+        background-image: url(../assets/img/patron-jardin-zen-japones-circulos-concentricos-cerca-arena-meditacion_99432-6439.jpg);
+    } */
 
     .main-header {
         padding: .5rem 1rem;
@@ -407,4 +406,9 @@ footer .f-msg {
 
 @media (min-width: 1200px) {}
 
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+    footer .contact-data-container {
+        font-size: 1rem;
+    }
+
+}
