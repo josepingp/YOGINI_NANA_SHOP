@@ -7,10 +7,13 @@ use Controllers\HomeController;
 use Controllers\LoginController;
 use Controllers\RegisterController;
 use Controllers\AccountController;
+use Lib\Middelware;
 use Lib\Router;
 
 session_start();
 ob_start();
+
+$authMiddleware = new Middelware();
 
 
 
@@ -38,13 +41,21 @@ Router::add('GET', '/user/close_sesion', function () {
     return (new LoginController())->closeSesion();
 });
 
+Router::add('GET', 'product/:categoria', function($categoria) {
+    echo "El enrutador funciona nos lleva a categoria".$categoria;
+});
+
+//Rutas protegias por Autenticacion
+
 Router::add('GET', '/user/myaccount', function () {
     return (new AccountController())->load();
-});
+}, [$authMiddleware, 'handle']);
 
 Router::add('POST', '/user/myaccount', function () {
     return (new AccountController())->update();
-});
+}, [$authMiddleware, 'handle']);
+
+//Rutas protegidas por rol
 
 
 

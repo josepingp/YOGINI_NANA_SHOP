@@ -31,17 +31,13 @@ class RegisterController
 
     public function createUser(): void
     {
-        if (!$this->authJWT->accessState()) {
-            try {
-                $this->userService->createUser($_POST, $_FILES);              
-                $this->userService->login($_POST['email'], $_POST['pass1']);
-                header('Location: /Yoguini_Nana_Shop/');
-            } catch (Exception $e) {
-                $msg = MessageSender::createMsg('error', $e->getMessage());
-                $this->pages->render('register', ['msg' => $msg]);
-            }
-        } else {
+        try {
+            $this->userService->createUser($_POST, $_FILES);
+            $this->userService->login($_POST['email'], $_POST['pass1']);
             header('Location: /Yoguini_Nana_Shop/');
+        } catch (Exception $e) {
+            $msg = MessageSender::createMsg('error', $e->getMessage());
+            $this->pages->render('register', ['msg' => $msg]);
         }
     }
 }

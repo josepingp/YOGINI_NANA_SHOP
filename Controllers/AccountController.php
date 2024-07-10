@@ -27,14 +27,10 @@ class AccountController
 
     public function load()
     {
-        if ($this->authJWT->accessState()) {
-            $user = $this->userService->findUserByEmail($_SESSION['email']);
-            $direction = $this->addressService->getMainAddressByUserId($user->getId());
 
-            $this->pages->render('myAccount', ['user' => $user, 'direction' => $direction]);
-        } else {
-            header('Location: /Yoguini_Nana_Shop/');
-        }
+        $user = $this->userService->findUserByEmail($_SESSION['email']);
+        $direction = $this->addressService->getMainAddressByUserId($user->getId());
+        $this->pages->render('myAccount', ['user' => $user, 'direction' => $direction]);
     }
 
     public function update()
@@ -45,7 +41,7 @@ class AccountController
 
             $this->userService->updateUser($_POST, $_FILES, $user);
             $this->addressService->updateMainShippingAddress($user->getId(), $_POST);
-            
+
             header('Location: /Yoguini_Nana_Shop/user/myaccount');
         } catch (Exception $e) {
             $user = $this->userService->findUserByEmail($_SESSION['email']);

@@ -26,14 +26,9 @@ class HomeController
     public function load()
     {
         $products = $this->productsService->findFeaturedProducts();
-
-        if ($this->authJWT->accessState()) {
-            $user = $this->userService->findUserByEmail($_SESSION['email']);
-            $this->pages->render('home', ['user' => $user, 'products' => $products]);
-        } else {
-            $this->pages->render('home', ['products' => $products]);
-        }
+        $user = (isset($_SESSION['email'])) ?  $this->userService->findUserByEmail($_SESSION['email']) : null;
+        $this->pages->render('home', compact('user', 'products'));
     }
-    
+
 
 }
