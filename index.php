@@ -8,12 +8,14 @@ use Controllers\LoginController;
 use Controllers\RegisterController;
 use Controllers\AccountController;
 use Lib\Middelware;
+use Lib\AuthRolMiddleware;
 use Lib\Router;
 
 session_start();
 ob_start();
 
 $authMiddleware = new Middelware();
+$authRolMiddleware = new authRolMiddleware();
 
 
 

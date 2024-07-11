@@ -25,11 +25,7 @@ class LoginController
 
     public function loadLogin()
     {
-        if ($this->authJWT->accessState()) {
-            header('Location: /Yoguini_Nana_Shop/');
-        } else {
             $this->pages->render('login');
-        }
     }
 
     public function login()
