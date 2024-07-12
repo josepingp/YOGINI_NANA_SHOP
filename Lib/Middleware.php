@@ -3,7 +3,7 @@ namespace Lib;
 
 use Lib\AuthJWT;
 
-class Middelware
+class Middleware
 {
     private AuthJWT $jwt;
 

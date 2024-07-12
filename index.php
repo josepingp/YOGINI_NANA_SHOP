@@ -7,14 +7,14 @@ use Controllers\HomeController;
 use Controllers\LoginController;
 use Controllers\RegisterController;
 use Controllers\AccountController;
-use Lib\Middelware;
+use Lib\Middleware;
 use Lib\AuthRolMiddleware;
 use Lib\Router;
 
 session_start();
 ob_start();
 
-$userMiddleware = new Middelware();
+$userMiddleware = new Middleware();
 $authRolMiddleware = new authRolMiddleware();
 
 
