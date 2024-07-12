@@ -41,12 +41,30 @@ class Router
         self::$globalMiddlewares[] = $middleware;
     }
 
+    // private static function handleMiddlewares($request, callable $controller, array $middlewares)
+    // {
+    //     $allMiddlewares = array_merge(self::$globalMiddlewares, $middlewares);
+
+    //     $handler = array_reduce(array_reverse($allMiddlewares), function ($next, $middleware) {
+    //         return function ($request) use ($middleware, $next) {
+    //             if (!is_callable($next)) {
+    //                 throw new \Exception("Next handler is not callable");
+    //             }
+    //             return $middleware->handle($request, $next);
+    //         };
+    //     }, $controller);
+
+    //     return $handler($request);
+    // }
     private static function handleMiddlewares($request, callable $controller, array $middlewares)
     {
         $allMiddlewares = array_merge(self::$globalMiddlewares, $middlewares);
 
         $handler = array_reduce(array_reverse($allMiddlewares), function ($next, $middleware) {
             return function ($request) use ($middleware, $next) {
+                if (!is_callable([$middleware, 'handle'])) {
+                    throw new \Exception("Middleware handle method is not callable");
+                }
                 return $middleware->handle($request, $next);
             };
         }, $controller);
@@ -86,4 +104,5 @@ class Router
         // Si no se encuentra ninguna ruta, puedes manejarlo aquí
         echo "404 Not Found";
     }
+
 }

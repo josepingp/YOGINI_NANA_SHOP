@@ -14,7 +14,7 @@ use Lib\Router;
 session_start();
 ob_start();
 
-$authMiddleware = new Middelware();
+$userMiddleware = new Middelware();
 $authRolMiddleware = new authRolMiddleware();
 
 
@@ -43,30 +43,39 @@ Router::add('GET', '/user/close_sesion', function () {
     return (new LoginController())->closeSesion();
 });
 
-Router::add('GET', 'product/:categoria', function($categoria) {
+Router::add('GET', '/products/:categoria', function($categoria) {
     echo "El enrutador funciona nos lleva a categoria".$categoria;
 });
+
 
 //Rutas protegias por Autenticacion
 
 Router::add('GET', '/user/myaccount', function () {
     return (new AccountController())->load();
-}, [$authMiddleware, 'handle']);
+}, [$userMiddleware]);
 
 Router::add('POST', '/user/myaccount', function () {
     return (new AccountController())->update();
-}, [$authMiddleware, 'handle']);
+}, [$userMiddleware]);
 
 //Rutas protegidas por rol
 
+Router::add('GET', '/admin', function () {
+    echo 'El enrutador funciona';
+},[$authRolMiddleware]);
 
 
-
-
-
-
-
+try {
 Router::dispatch();
+} catch (Exception $e) {
+    // Manejar la excepción y mostrar un mensaje de error amigable
+    echo "Se ha producido un error: " . $e->getMessage();
+    // Opcionalmente, puedes registrar el error en un archivo de registro
+}
+
+
+
+// Router::dispatch();
 
 
 
