@@ -77,7 +77,7 @@
                         <a href="/Yoguini_Nana_Shop/" class="nav-m-link">Home</a>
                     </li>
                     <li class="nav-m-item-dropdown">
-                        <a href="/proyecto/products" class="nav-m-link dropdown-toggle">
+                        <a href="/Yoguini_Nana_Shop/products" class="nav-m-link dropdown-toggle">
                             Productos
                             <?php include './assets/svg/arrow-down.php'; ?>
                             <?php include './assets/svg/arrow-up.php'; ?>
@@ -143,7 +143,7 @@
                         <li class="d-navbar-link"><a href="/Yoguini_Nana_Shop/">Home</a></li>
 
                         <li class="d-navbar-link drop">
-                            <a class="nav-d-link" href="/proyecto/products">
+                            <a class="nav-d-link" href="/Yoguini_Nana_Shop/products">
                                 Productos
                                 <?php include './assets/svg/arrow-down.php'; ?>
                                 <?php include './assets/svg/arrow-up.php'; ?>

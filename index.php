@@ -3,6 +3,7 @@ require_once "inc/autoloader.php";
 require_once "./vendor/autoload.php";
 require_once "config.php";
 
+use Controllers\ProductsContoller;
 use Controllers\HomeController;
 use Controllers\LoginController;
 use Controllers\RegisterController;
@@ -43,10 +44,13 @@ Router::add('GET', '/user/close_sesion', function () {
     return (new LoginController())->closeSesion();
 });
 
+Router::add('GET', '/products', function() {
+    return (new ProductsContoller())->load();
+});
+
 Router::add('GET', '/products/:categoria', function($categoria) {
     echo "El enrutador funciona nos lleva a categoria".$categoria;
 });
-
 
 //Rutas protegias por Autenticacion
 
