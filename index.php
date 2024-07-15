@@ -12,13 +12,12 @@ use Lib\Middleware;
 use Lib\AuthRolMiddleware;
 use Lib\Router;
 
+
 session_start();
 ob_start();
 
 $userMiddleware = new Middleware();
 $authRolMiddleware = new authRolMiddleware();
-
-
 
 Router::add('GET', '/', function () {
     return (new HomeController())->load();
@@ -48,12 +47,11 @@ Router::add('GET', '/products', function() {
     return (new ProductsContoller())->load();
 });
 
-Router::add('GET', '/products/:categoria', function($categoria) {
-    echo "El enrutador funciona nos lleva a categoria".$categoria;
+Router::add('GET', '/products/:category', function($category) {
+    return (new ProductsContoller())->listCategory($category);
 });
 
 //Rutas protegias por Autenticacion
-
 Router::add('GET', '/user/myaccount', function () {
     return (new AccountController())->load();
 }, [$userMiddleware]);

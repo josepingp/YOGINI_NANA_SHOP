@@ -7,6 +7,8 @@ use Services\ProductsService;
 use Services\UsersService;
 use Lib\Pages;
 
+require_once "config.php";
+
 class ProductsContoller
 {
     private UsersService $service;
@@ -34,6 +36,36 @@ class ProductsContoller
             $item = [];
             $itemPhotos = [];
             $mainPhoto = '';
+            
+            foreach ($photos as $key => $photo) {
+                if ($photo['product_id'] == $product['id'] && $photo['is_main'] == 0) {
+                    array_push($itemPhotos, $photo['url']);            
+                } elseif ($photo['product_id'] == $product['id']) {
+                    $mainPhoto = $photo['url'];
+                }
+            }
+
+            $item[] = ['id' => $product['id'], 'name' => $product['name'], 'price' => $product['price'], 'main_photo' => $mainPhoto, 'photos' => $itemPhotos];
+            $productsToFront[] = $item;
+        }
+
+        $user = (isset($_SESSION['email'])) ? $this->service->findUserByEmail($_SESSION['email']) : null;
+        $this->pages->render('products', [
+            'products' => $productsToFront,
+            'user' => $user
+        ]);
+    }
+
+    public function listCategory($category)
+    {
+        $photos = $this->photosService->findAllPhotos();
+        $products = $this->productsService->findAllProductsByCategory(CATEGORIES[$category]);
+        $productsToFront = [];
+
+        foreach ($products as $product) {
+            $item = [];
+            $itemPhotos = [];
+            $mainPhoto = '';
             foreach ($photos as $key => $photo) {
                 if ($photo['product_id'] == $product['id'] && $photo['is_main'] == 0) {
                     array_push($itemPhotos, $photo['url']);
@@ -45,95 +77,41 @@ class ProductsContoller
             $item[] = ['id' => $product['id'], 'name' => $product['name'], 'price' => $product['price'], 'main_photo' => $mainPhoto, 'photos' => $itemPhotos];
             $productsToFront[] = $item;
         }
+        
+        $user = (isset($_SESSION['email'])) ? $this->service->findUserByEmail($_SESSION['email']) : null;
+        $this->pages->render('products', [
+            'products' => $productsToFront,
+            'category' => $category,
+            'user' => $user
+        ]);
+    }
+
+    public function detail($id)
+    {
+        $product = $this->productsService->findProductById($id);
+        $photos = $this->photosService->findAllPhotosByProductId($id);
 
         if ($this->authJWT->accessState()) {
             $user = $this->service->findUserByEmail($_SESSION['email']);
-            $this->pages->render('products', [
-                'products' => $productsToFront,
-                'user' => $user
+            $this->pages->render('productDetail', [
+                'user' => $user,
+                'product' => $product,
+                'photos' => $photos
             ]);
         } else {
-            $this->pages->render('products', [
-                'products' => $productsToFront
+            $this->pages->render('productDetail', [
+                'product' => $product,
+                'photos' => $photos
             ]);
         }
     }
 
-    public function listCategory($category)
+    public function addProductToCart()
     {
-            $categories = [
-                '1' => 'MODA',
-                '2' => 'ZAFUS',
-                '3' => 'ESTERILLAS',
-                '4' => 'MANTAS',
-                '5' => 'ACCESORIOS',
-                '6' => 'MEDITACION',
-            ];
-
-            
-            $photos = $this->photosService->findAllPhotos();
-            $products = $this->productsService->findAllProductsByCategory($category);
-            $productsToFront = [];
-    
-            foreach ($products as $product) {
-                $item = [];
-                $itemPhotos = [];
-                $mainPhoto = '';
-                foreach ($photos as $key => $photo) {
-                    if ($photo['product_id'] == $product['id'] && $photo['is_main'] == 0) {
-                        array_push($itemPhotos, $photo['url']);
-                    } elseif ($photo['product_id'] == $product['id']) {
-                        $mainPhoto = $photo['url'];
-                    }
-                }
-    
-                $item[] = ['id' => $product['id'], 'name' => $product['name'], 'price' => $product['price'], 'main_photo' => $mainPhoto, 'photos' => $itemPhotos];
-                $productsToFront[] = $item;
-            }
-            
-            $category = $categories[$category];
-
-            if ($this->authJWT->accessState()) {
-                $user = $this->service->findUserByEmail($_SESSION['email']);
-                $this->pages->render('products', [
-                    'products' => $productsToFront,
-                    'category' => $category,
-                    'user' => $user
-                ]);
-            } else {
-                $this->pages->render('products', [
-                    'category' => $category,
-                    'products' => $productsToFront
-                ]);
-            }
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
         }
+        array_push($_SESSION['cart'], $_POST['product_id']);
+    }
 
-        public function detail($id)
-        {
-            $product = $this->productsService->findProductById($id);
-            $photos = $this->photosService->findAllPhotosByProductId($id);
-            
-            if ($this->authJWT->accessState()) {
-                $user = $this->service->findUserByEmail($_SESSION['email']);
-                $this->pages->render('productDetail', [
-                    'user' => $user,
-                    'product' => $product,
-                    'photos' => $photos
-                ]);
-            } else {
-                $this->pages->render('productDetail', [
-                    'product' => $product,
-                    'photos' => $photos
-                ]);
-            }
-        }
-
-        public function addProductToCart() 
-        {
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
-            } 
-            array_push($_SESSION['cart'], $_POST['product_id']);
-        }
-    
 }

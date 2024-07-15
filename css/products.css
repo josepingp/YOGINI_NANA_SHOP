@@ -1,6 +1,6 @@
 main {
     position: relative;
-    min-height: 87svh;
+    min-height: 86svh;
 }
 
 .tittle-p-l {
@@ -139,7 +139,7 @@ main {
         position: relative;
         float: left;
         left: 0;
-        min-width: 150px;
+        width: 180px;
         display: flex;
         justify-content: center;
         background: radial-gradient(circle, rgba(200, 173, 157, .5) 0%, rgba(189, 139, 122, .5) 100%);

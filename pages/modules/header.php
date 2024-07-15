@@ -14,8 +14,11 @@
     <base href="/Yoguini_Nana_Shop/">
     <link rel="stylesheet" href="./css/swiper-bundle.min.css">
     <link rel="stylesheet" href="./css/base.css">
-    <?php if (file_exists('./css/' . ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/') . '.css')) {
-        echo '<link rel="stylesheet" href="./css/' . ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/') . '.css">';
+    <?php 
+    use Utils\CSSLoader;
+
+    if (CSSLoader::loadCSS(ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/'), ROUTES) != null) {
+        echo '<link rel="stylesheet" href="./css/' . CSSLoader::loadCSS(ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/'), ROUTES).'">';
     }
     ?>
 </head>
