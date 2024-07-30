@@ -12,13 +12,13 @@
     <title>Yogini Nana</title>
     <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
     <base href="/Yoguini_Nana_Shop/">
-    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+    <!-- <link rel="stylesheet" href="./css/swiper-bundle.min.css"> -->
     <link rel="stylesheet" href="./css/base.css">
-    <?php 
-    use Utils\CSSLoader;
+    <?php
+    use Utils\ResourcesLoader;
 
-    if (CSSLoader::loadCSS(ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/'), ROUTES) != null) {
-        echo '<link rel="stylesheet" href="./css/' . CSSLoader::loadCSS(ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/'), ROUTES).'">';
+    foreach (ResourcesLoader::resourceLoad(ltrim(preg_replace('/Yoguini_Nana_Shop/', '', $_SERVER['REQUEST_URI']), '/'), ROUTES, 'css') as $file) {
+        echo '<link rel="stylesheet" href="./css/' . $file . '">';
     }
     ?>
 </head>
@@ -28,21 +28,21 @@
         <nav class="mobile nav">
 
             <section class="flex main-header">
-                <a class="brand g-1 f-align" href="/Yoguini_Nana_Shop/">
+                <a class="brand g-1 f-align" href="<?=ROUTES['index']['route']?>">
                     <img src="./assets/img/logo-sin-fondo.png" class="" alt="logo" width="55">
                     <p>YOGUINI NANA</p>
                 </a>
 
                 <div class="f-align g-1">
-                    <div class="">
-                        <?php
-                        echo '<div class="cart-counter">';
-                        if (isset($_SESSION['cart'])) {
-                            echo count($_SESSION['cart']);
-                        }
-                        echo '</div>';
-                        ?>
-                        <a href="/proyecto/cart" class="cart-link">
+                    <div class="h-cart-container">
+                        <div class="cart-counter"><?php
+                            if (isset($_SESSION['cart'])) {
+                                echo count($_SESSION['cart']);
+                            }else {
+                                echo '';
+                            }
+                        ?></div>
+                        <a href="<?=ROUTES['cart']['route']?>" class="cart-link">
                             <?php include './assets/svg/cart-icon.php'; ?>
                         </a>
                     </div>
@@ -56,7 +56,7 @@
             <section id="nav-m-links">
                 <div id="user-login-container" class="f-align">
                     <?php if (isset($user)) { ?>
-                        <a href="/Yoguini_Nana_Shop/user/myaccount">
+                        <a href="<?=ROUTES['user.myaccount']['route']?>">
                             <img class="user-login-img" src="<?php if (isset($user)) {
                                 if ($user->getPhoto() != '') {
                                     echo './repo/user/' . $user->getPhoto();
@@ -77,22 +77,22 @@
 
                 <ul class="nav-m-items">
                     <li class="nav-m-item">
-                        <a href="/Yoguini_Nana_Shop/" class="nav-m-link">Home</a>
+                        <a href="<?=ROUTES['index']['route']?>" class="nav-m-link">Home</a>
                     </li>
                     <li class="nav-m-item-dropdown">
-                        <a href="/Yoguini_Nana_Shop/products" class="nav-m-link dropdown-toggle">
+                        <a href="<?=ROUTES['products']['route']?>" class="nav-m-link dropdown-toggle">
                             Productos
                             <?php include './assets/svg/arrow-down.php'; ?>
                             <?php include './assets/svg/arrow-up.php'; ?>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="/proyecto/products/1" class="dropdown-m-item">Moda</a></li>
-                            <li><a href="/proyecto/products/5" class="dropdown-m-item">Accesorios</a></li>
-                            <li><a href="/proyecto/products/3" class="dropdown-m-item">Esterillas</a></li>
-                            <li><a href="/proyecto/products/4" class="dropdown-m-item">Mantas</a></li>
-                            <li><a href="/proyecto/products/2" class="dropdown-m-item">Zafus</a></li>
-                            <li><a href="/proyecto/products/6" class="dropdown-m-item">Meditación</a></li>
+                            <li><a href="<?=ROUTES['products']['route']?>/moda" class="dropdown-m-item">Moda</a></li>
+                            <li><a href="<?=ROUTES['products']['route']?>/accesorios" class="dropdown-m-item">Accesorios</a></li>
+                            <li><a href="<?=ROUTES['products']['route']?>/esterillas" class="dropdown-m-item">Esterillas</a></li>
+                            <li><a href="<?=ROUTES['products']['route']?>/mantas" class="dropdown-m-item">Mantas</a></li>
+                            <li><a href="<?=ROUTES['products']['route']?>/zafus" class="dropdown-m-item">Zafus</a></li>
+                            <li><a href="<?=ROUTES['products']['route']?>/meditacion" class="dropdown-m-item">Meditación</a></li>
                         </ul>
                     </li>
 
@@ -103,7 +103,7 @@
                     <li class="nav-m-item">
                         <a href="/proyecto/contact" class="nav-m-link">Contacto</a>
                     </li>
-                    
+
                     <li class="nav-m-item">
                         <a href="/Yoguini_Nana_Shop/user/close_sesion" class="nav-m-link">Cerrar sesion</a>
                     </li>
@@ -135,7 +135,7 @@
         <nav class="nav desktop">
             <section class="flex main-header">
                 <section class="f-align link-section">
-                    <a class="brand g-1" href="/Yoguini_Nana_Shop">
+                    <a class="brand g-1" href="<?=ROUTES['index']['route']?>">
                         <div class="brand g-1 f-align">
                             <img src="./assets/img/logo-sin-fondo.png" class="" alt="logo" width="55">
                             <p>YOGUINI NANA</p>
@@ -143,20 +143,20 @@
                     </a>
 
                     <ul class="f-align g-2">
-                        <li class="d-navbar-link"><a href="/Yoguini_Nana_Shop/">Home</a></li>
+                        <li class="d-navbar-link"><a href="<?=ROUTES['index']['route']?>">Home</a></li>
 
                         <li class="d-navbar-link drop">
-                            <a class="nav-d-link" href="/Yoguini_Nana_Shop/products">
+                            <a class="nav-d-link" href="<?=ROUTES['products']['route']?>">
                                 Productos
                                 <?php include './assets/svg/arrow-down.php'; ?>
                                 <?php include './assets/svg/arrow-up.php'; ?>
                                 <ul class="d dropdown-menu">
-                                    <li><a href="/proyecto/products/1" class="dropdown-d-item">Moda</a></li>
-                                    <li><a href="/proyecto/products/5" class="dropdown-d-item">Accesorios</a></li>
-                                    <li><a href="/proyecto/products/3" class="dropdown-d-item">Esterillas</a></li>
-                                    <li><a href="/proyecto/products/4" class="dropdown-d-item">Mantas</a></li>
-                                    <li><a href="/proyecto/products/2" class="dropdown-d-item">Zafus</a></li>
-                                    <li><a href="/proyecto/products/6" class="dropdown-d-item">Meditación</a></li>
+                                    <li><a href="<?=ROUTES['products']['route']?>/moda" class="dropdown-d-item">Moda</a></li>
+                                    <li><a href="<?=ROUTES['products']['route']?>/accesorios" class="dropdown-d-item">Accesorios</a></li>
+                                    <li><a href="<?=ROUTES['products']['route']?>/esterillas" class="dropdown-d-item">Esterillas</a></li>
+                                    <li><a href="<?=ROUTES['products']['route']?>/mantas" class="dropdown-d-item">Mantas</a></li>
+                                    <li><a href="<?=ROUTES['products']['route']?>/zafus" class="dropdown-d-item">Zafus</a></li>
+                                    <li><a href="<?=ROUTES['products']['route']?>/meditacion" class="dropdown-d-item">Meditación</a></li>
                                 </ul>
                             </a>
 
@@ -184,22 +184,20 @@
                 </section>
 
                 <section class="f-align g-2 user-section">
-                    <article id="h-cart-container">
-                        <?php
-                        echo '<div class="cart-counter">';
-                        if (isset($_SESSION['cart'])) {
-                            echo count($_SESSION['cart']);
-                        }
-                        echo '</div>';
-                        ?>
-                        <a href="" class="f-align">
+                    <article class="h-cart-container">
+                        <div class="cart-counter"><?php
+                            if (isset($_SESSION['cart'])) {
+                                echo count($_SESSION['cart']);
+                            }
+                        ?></div>
+                        <a href="<?=ROUTES['cart']['route']?>" class="f-align">
                             <?php include './assets/svg/cart-icon.php'; ?>
                         </a>
                     </article>
                     <article class="icon-login-container f-align">
                         <?php if (isset($user)) { ?>
                             <a class="login-link f-align g-1"
-                                href="/Yoguini_Nana_Shop/user/myaccount"><?php echo $user->takeInitials(); ?>
+                                href="<?=ROUTES['user.myaccount']['route']?>"><?php echo $user->takeInitials(); ?>
                                 <img src="<?php if (isset($user)) {
                                     if ($user->getPhoto() != '') {
                                         echo './repo/user/' . $user->getPhoto();
@@ -212,12 +210,12 @@
                                 } ?>" alt="user image" class="user-login-img"></a>
                         </article>
                         <article>
-                            <a href="/Yoguini_Nana_Shop/user/close_sesion"><?php include "./assets/svg/logout.php";?></a>
+                            <a href="/Yoguini_Nana_Shop/user/close_sesion"><?php include "./assets/svg/logout.php"; ?></a>
                         <?php } else { ?>
                         </article>
                         <div class="login-btns f-align">
-                            <a class="login-account" href="/Yoguini_Nana_Shop/user/login">Inicia sesion</a>
-                            <a class="create-account" href="/Yoguini_Nana_Shop/user/register">Registrarse</a>
+                            <a class="login-account" href="<?=ROUTES['user.login']['route']?>">Inicia sesion</a>
+                            <a class="create-account" href="<?=ROUTES['user.register']['route']?>">Registrarse</a>
                         </div>
                     <?php } ?>
 

@@ -9,7 +9,7 @@
 
     <section class="home-container sections">
         <div class="section-link">
-            <a href="/proyecto/products/1">
+            <a href="<?=ROUTES['products']['route']?>/moda">
                 <div class="img-sections-container">
                     <img class="section-link-img" src="./assets/img/ropa.png" alt="">
                 </div>
@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="section-link">
-            <a href="/proyecto/products/5">
+            <a href="<?=ROUTES['products']['route']?>/accesorios">
                 <div class="img-sections-container">
                     <img class="section-link-img" src="./assets/img/accesoriosfinal.png" alt="">
                 </div>
@@ -29,7 +29,7 @@
             </a>
         </div>
         <div class="section-link">
-            <a href="/proyecto/products/3">
+            <a href="<?=ROUTES['products']['route']?>/zafus">
                 <div class="img-sections-container">
                     <img class="section-link-img" src="./assets/img/azfusfinal.png" alt="">
                 </div>
@@ -39,7 +39,7 @@
             </a>
         </div>
         <div class="section-link">
-            <a href="/proyecto/products/4">
+            <a href="<?=ROUTES['products']['route']?>/esterillas">
                 <div class="img-sections-container">
                     <img class="section-link-img" src="./assets/img/esterillafinal.png" alt="">
                 </div>
@@ -49,7 +49,7 @@
             </a>
         </div>
         <div class="section-link">
-            <a href="/proyecto/products/2">
+            <a href="<?=ROUTES['products']['route']?>/mantas">
                 <div class="img-sections-container">
                     <img class="section-link-img" src="./assets/img/mantasfinal.png" alt="">
                 </div>
@@ -59,7 +59,7 @@
             </a>
         </div>
         <div class="section-link">
-            <a href="/proyecto/products/6">
+            <a href="<?=ROUTES['products']['route']?>/meditacion">
                 <div class="img-sections-container">
                     <img class="section-link-img" src="./assets/img/meditacionfinal.png" alt="">
                 </div>
@@ -77,7 +77,7 @@
                 <main class="sliders-container swiper-wrapper">
                     <?php foreach ($products as $product) :?>
                     <article class="card swiper-slide">
-                        <a href="" class="link-wrapper">
+                        <a href="<?=preg_replace('/:id/', $product['id'], ROUTES['products.detail']['route'])?>" class="link-wrapper">
                             <div class="card-img-cont">
                                 <img src="./repo/product/<?=$product['url'];?>" alt="">
                             </div>

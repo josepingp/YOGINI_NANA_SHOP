@@ -1,4 +1,4 @@
-<script>
+
     /*MOVIMIENTO DE PAGINAS */
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -218,4 +218,3 @@
         reader.readAsDataURL(file);
     }
 });
-</script>

@@ -143,7 +143,7 @@ class ProductsRepository
         $this->conexion->query("INSERT INTO photos ($fields) VALUES $values");
     }
 
-    public function findAllProductsByCategory(int $categoryId): ?array
+    public function findAllProductsByCategory(int $categoryId): array
     {
         $this->conexion->query("SELECT products.id, products.name, products.price FROM products WHERE category_id = $categoryId");
         return $this->conexion->getAll();

@@ -12,7 +12,6 @@ use Lib\Middleware;
 use Lib\AuthRolMiddleware;
 use Lib\Router;
 
-
 session_start();
 ob_start();
 
@@ -49,6 +48,10 @@ Router::add('GET', '/products', function() {
 
 Router::add('GET', '/products/:category', function($category) {
     return (new ProductsContoller())->listCategory($category);
+});
+
+Router::add('GET', '/products/detail/:id', function($id) {
+    return (new ProductsContoller())->detail($id);
 });
 
 //Rutas protegias por Autenticacion

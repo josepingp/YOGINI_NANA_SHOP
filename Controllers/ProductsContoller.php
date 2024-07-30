@@ -36,10 +36,10 @@ class ProductsContoller
             $item = [];
             $itemPhotos = [];
             $mainPhoto = '';
-            
+
             foreach ($photos as $key => $photo) {
                 if ($photo['product_id'] == $product['id'] && $photo['is_main'] == 0) {
-                    array_push($itemPhotos, $photo['url']);            
+                    array_push($itemPhotos, $photo['url']);
                 } elseif ($photo['product_id'] == $product['id']) {
                     $mainPhoto = $photo['url'];
                 }
@@ -77,7 +77,7 @@ class ProductsContoller
             $item[] = ['id' => $product['id'], 'name' => $product['name'], 'price' => $product['price'], 'main_photo' => $mainPhoto, 'photos' => $itemPhotos];
             $productsToFront[] = $item;
         }
-        
+
         $user = (isset($_SESSION['email'])) ? $this->service->findUserByEmail($_SESSION['email']) : null;
         $this->pages->render('products', [
             'products' => $productsToFront,
@@ -91,19 +91,12 @@ class ProductsContoller
         $product = $this->productsService->findProductById($id);
         $photos = $this->photosService->findAllPhotosByProductId($id);
 
-        if ($this->authJWT->accessState()) {
-            $user = $this->service->findUserByEmail($_SESSION['email']);
-            $this->pages->render('productDetail', [
-                'user' => $user,
-                'product' => $product,
-                'photos' => $photos
-            ]);
-        } else {
-            $this->pages->render('productDetail', [
-                'product' => $product,
-                'photos' => $photos
-            ]);
-        }
+        $user = (isset($_SESSION['email'])) ? $this->service->findUserByEmail($_SESSION['email']) : null;
+        $this->pages->render('productDetail', [
+            'user' => $user,
+            'product' => $product,
+            'photos' => $photos
+        ]);
     }
 
     public function addProductToCart()

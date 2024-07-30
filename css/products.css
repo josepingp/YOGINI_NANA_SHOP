@@ -132,7 +132,7 @@ main {
 
     main {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 180px auto;
     }
 
     .menu-products-c {
